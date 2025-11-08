@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ANURAG BOSS PANEL</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff; text-align: center; padding: 30px; margin: 0;
+    }
+    h1 { color:#00e0ff; text-shadow:0 0 10px #00e0ff; }
+    #controls, #log { margin:20px auto; max-width:600px; border-radius:10px; padding:20px; }
+    #controls { background:rgba(255,255,255,0.1); }
+    input,textarea{width:90%;margin:10px 0;padding:10px;border:none;border-radius:6px;background:rgba(255,255,255,0.15);color:#fff;}
+    button{margin:6px;padding:10px 20px;border:none;border-radius:6px;background:#00e0ff;color:#fff;cursor:pointer;}
+    #log{background:rgba(0,0,0,0.4);height:300px;overflow:auto;text-align:left;font-family:monospace;color:#00ffc6;}
+  </style>
+</head>
+<body>
+  <h1>👑 ANURAG BOSS PANEL 👑</h1>
+  <div id="controls">
+    <input type="text" id="adminUID" placeholder="Enter Admin UID">
+    <textarea id="appstate" placeholder="Paste your Appstate JSON here..."></textarea><br>
+    <button onclick="startBot()">🚀 Start Bot</button>
+    <button onclick="stopBot()">🛑 Stop Bot</button>
+    <button onclick="getLogs()">📜 Refresh Logs</button>
+  </div>
+  <div id="log">💻 Waiting for bot logs...</div>
+  <footer>Made with ❤️ by <b style="color:#ff007f">Anurag</b></footer>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const socket = io();
+    const logDiv = document.getElementById("log");
+
+    function startBot(){
+      const uid=document.getElementById("adminUID").value.trim();
+      const appstate=document.getElementById("appstate").value.trim();
+      if(!uid||!appstate){alert("⚠️ Admin UID & Appstate required!");return;}
+      fetch("/start-bot",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({admin:uid,appstate})})
+      .then(r=>r.text()).then(alert);
+      socket.emit("join",uid);
+    }
+
+    function stopBot(){
+      const uid=document.getElementById("adminUID").value.trim();
+      if(!uid){alert("⚠️ Enter Admin UID!");return;}
+      fetch(`/stop-bot?uid=${uid}`).then(r=>r.text()).then(alert);
+    }
+
+    function getLogs(){
+      const uid=document.getElementById("adminUID").value.trim();
+      if(!uid){alert("⚠️ Enter Admin UID!");return;}
+      fetch(`/logs?uid=${uid}`).then(r=>r.text()).then(t=>logDiv.innerText=t);
+    }
+
+    socket.on("botlog", msg=>{
+      logDiv.innerText += msg + "\n";
+      logDiv.scrollTop = logDiv.scrollHeight;
+    });
+  </script>
+</body>
+</html>
