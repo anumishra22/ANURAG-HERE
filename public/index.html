@@ -2,32 +2,523 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ANURAG BOSS PANEL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANURAG MISHRA BOSS PANEL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff; text-align: center; padding: 30px; margin: 0;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1 { color:#00e0ff; text-shadow:0 0 10px #00e0ff; }
-    #controls, #log { margin:20px auto; max-width:600px; border-radius:10px; padding:20px; }
-    #controls { background:rgba(255,255,255,0.1); }
-    input,textarea{width:90%;margin:10px 0;padding:10px;border:none;border-radius:6px;background:rgba(255,255,255,0.15);color:#fff;}
-    button{margin:6px;padding:10px 20px;border:none;border-radius:6px;background:#00e0ff;color:#fff;cursor:pointer;}
-    #log{background:rgba(0,0,0,0.4);height:300px;overflow:auto;text-align:left;font-family:monospace;color:#00ffc6;}
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 25%, #16213e 50%, #0a1628 75%, #0d0d2b 100%);
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(0, 200, 255, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cyber-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(0, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      padding: 30px 0;
+      position: relative;
+    }
+
+    .crown-icon {
+      font-size: 50px;
+      animation: pulse-glow 2s ease-in-out infinite;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 10px #ffd700) drop-shadow(0 0 20px #ffa500); }
+      50% { filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 40px #ffa500); }
+    }
+
+    .main-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 900;
+      background: linear-gradient(90deg, #00ffff, #00ccff, #8a2be2, #ff00ff, #00ffff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-shift 3s linear infinite;
+      text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      letter-spacing: 3px;
+      margin-bottom: 5px;
+    }
+
+    @keyframes gradient-shift {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .sub-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      color: #00ffff;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      animation: flicker 4s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+      52% { opacity: 0.6; }
+      54% { opacity: 1; }
+    }
+
+    .glass-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      padding: 30px;
+      margin: 20px 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 40px rgba(0, 255, 255, 0.1);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+      animation: shine 4s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -100%; }
+      50%, 100% { left: 100%; }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #00ffff, #8a2be2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .card-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #00ffff;
+      letter-spacing: 2px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.85rem;
+      color: rgba(0, 255, 255, 0.7);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cyber-input {
+      width: 100%;
+      padding: 15px 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .cyber-input:focus {
+      border-color: #00ffff;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.05);
+    }
+
+    .cyber-input::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    textarea.cyber-input {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .cyber-btn {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cyber-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .cyber-btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-start {
+      background: linear-gradient(135deg, #00ffff, #00aaff);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .btn-start:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+    }
+
+    .btn-stop {
+      background: linear-gradient(135deg, #ff4757, #ff6b7a);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+    }
+
+    .btn-stop:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(255, 71, 87, 0.6);
+    }
+
+    .btn-logs {
+      background: linear-gradient(135deg, #8a2be2, #9b4dca);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+    }
+
+    .btn-logs:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(138, 43, 226, 0.6);
+    }
+
+    .log-container {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      padding: 20px;
+      height: 280px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #00ffc6;
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .log-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .log-container::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+    }
+
+    .log-container::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #00ffff, #8a2be2);
+      border-radius: 4px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px 0;
+      position: relative;
+    }
+
+    .footer-glass {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      border: 1px solid rgba(0, 255, 255, 0.15);
+      padding: 25px;
+      display: inline-block;
+    }
+
+    .footer-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+    }
+
+    .creator-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 25px rgba(37, 211, 102, 0.4);
+      letter-spacing: 1px;
+    }
+
+    .whatsapp-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 40px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-icon {
+      font-size: 1.3rem;
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #00ff00;
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .decorative-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00ffff, #8a2be2, #00ffff, transparent);
+      margin: 20px 0;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+      .glass-card {
+        padding: 20px;
+      }
+      .button-group {
+        flex-direction: column;
+      }
+      .cyber-btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>👑 ANURAG BOSS PANEL 👑</h1>
-  <div id="controls">
-    <input type="text" id="adminUID" placeholder="Enter Admin UID">
-    <textarea id="appstate" placeholder="Paste your Appstate JSON here..."></textarea><br>
-    <button onclick="startBot()">🚀 Start Bot</button>
-    <button onclick="stopBot()">🛑 Stop Bot</button>
-    <button onclick="getLogs()">📜 Refresh Logs</button>
+  <div class="cyber-grid"></div>
+  <div class="floating-particles">
+    <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+    <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+    <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+    <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+    <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+    <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+    <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="left: 90%; animation-delay: 3.5s;"></div>
   </div>
-  <div id="log">💻 Waiting for bot logs...</div>
-  <footer>Made with ❤️ by <b style="color:#ff007f">Anurag</b></footer>
+
+  <div class="container">
+    <header class="header">
+      <span class="crown-icon">👑</span>
+      <h1 class="main-title">ANURAG MISHRA</h1>
+      <p class="sub-title">BOSS HERE</p>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>SYSTEM ONLINE</span>
+      </div>
+    </header>
+
+    <div class="decorative-line"></div>
+
+    <div class="glass-card">
+      <div class="card-header">
+        <div class="card-icon">🤖</div>
+        <span class="card-title">BOT CONTROL CENTER</span>
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">Admin UID</label>
+        <input type="text" id="adminUID" class="cyber-input" placeholder="Enter your Admin UID...">
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">Appstate JSON</label>
+        <textarea id="appstate" class="cyber-input" placeholder="Paste your Appstate JSON here..."></textarea>
+      </div>
+
+      <div class="button-group">
+        <button class="cyber-btn btn-start" onclick="startBot()">🚀 START BOT</button>
+        <button class="cyber-btn btn-stop" onclick="stopBot()">🛑 STOP BOT</button>
+        <button class="cyber-btn btn-logs" onclick="getLogs()">📜 REFRESH LOGS</button>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <div class="card-header">
+        <div class="card-icon">💻</div>
+        <span class="card-title">LIVE TERMINAL</span>
+      </div>
+      <div id="log" class="log-container">[ SYSTEM ] Waiting for bot connection...</div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-glass">
+        <p class="footer-title">POWERED BY</p>
+        <h3 class="creator-name">ANURAG MISHRA</h3>
+        <a href="https://wa.me/916394812128" target="_blank" class="whatsapp-btn">
+          <span class="whatsapp-icon">💬</span>
+          CONTACT OWNER
+        </a>
+      </div>
+    </footer>
+  </div>
 
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <script>
@@ -35,29 +526,42 @@
     const logDiv = document.getElementById("log");
 
     function startBot(){
-      const uid=document.getElementById("adminUID").value.trim();
-      const appstate=document.getElementById("appstate").value.trim();
-      if(!uid||!appstate){alert("⚠️ Admin UID & Appstate required!");return;}
-      fetch("/start-bot",{method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({admin:uid,appstate})})
-      .then(r=>r.text()).then(alert);
-      socket.emit("join",uid);
+      const uid = document.getElementById("adminUID").value.trim();
+      const appstate = document.getElementById("appstate").value.trim();
+      if(!uid || !appstate){
+        alert("⚠️ Admin UID & Appstate required!");
+        return;
+      }
+      fetch("/start-bot", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({admin: uid, appstate})
+      })
+      .then(r => r.text())
+      .then(alert);
+      socket.emit("join", uid);
     }
 
     function stopBot(){
-      const uid=document.getElementById("adminUID").value.trim();
-      if(!uid){alert("⚠️ Enter Admin UID!");return;}
-      fetch(`/stop-bot?uid=${uid}`).then(r=>r.text()).then(alert);
+      const uid = document.getElementById("adminUID").value.trim();
+      if(!uid){
+        alert("⚠️ Enter Admin UID!");
+        return;
+      }
+      fetch(`/stop-bot?uid=${uid}`).then(r => r.text()).then(alert);
     }
 
     function getLogs(){
-      const uid=document.getElementById("adminUID").value.trim();
-      if(!uid){alert("⚠️ Enter Admin UID!");return;}
-      fetch(`/logs?uid=${uid}`).then(r=>r.text()).then(t=>logDiv.innerText=t);
+      const uid = document.getElementById("adminUID").value.trim();
+      if(!uid){
+        alert("⚠️ Enter Admin UID!");
+        return;
+      }
+      fetch(`/logs?uid=${uid}`).then(r => r.text()).then(t => logDiv.innerText = t);
     }
 
-    socket.on("botlog", msg=>{
-      logDiv.innerText += msg + "\n";
+    socket.on("botlog", msg => {
+      logDiv.innerText += "\n" + msg;
       logDiv.scrollTop = logDiv.scrollHeight;
     });
   </script>
