@@ -2,35 +2,355 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ANURAG BOSS PANEL</title>
+  <title>⚡ ANURAG MISHRA: CYBER-CORE PANEL ⚡</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff; text-align: center; padding: 30px; margin: 0;
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&family=Press+Start+2P&display=swap');
+
+    /* Global Variables for Anime Cyber-Core Theme */
+    :root {
+      --bg-cyber-dark: #080312; 
+      --card-cyber: rgba(26, 10, 44, 0.95); /* Slightly less translucent card for contrast */
+      --neon-blue: #00f0ff; 
+      --neon-purple: #9d00ff; 
+      --text-glow: #e0faff; 
+      --shadow-intensity: rgba(0, 0, 0, 0.9);
+      /* Custom Button Glow Colors */
+      --glow-start: #00ff00;
+      --glow-stop: #ff3333;
+      --glow-logs: #33aaff;
     }
-    h1 { color:#00e0ff; text-shadow:0 0 10px #00e0ff; }
-    #controls, #log { margin:20px auto; max-width:600px; border-radius:10px; padding:20px; }
-    #controls { background:rgba(255,255,255,0.1); }
-    input,textarea{width:90%;margin:10px 0;padding:10px;border:none;border-radius:6px;background:rgba(255,255,255,0.15);color:#fff;}
-    button{margin:6px;padding:10px 20px;border:none;border-radius:6px;background:#00e0ff;color:#fff;cursor:pointer;}
-    #log{background:rgba(0,0,0,0.4);height:300px;overflow:auto;text-align:left;font-family:monospace;color:#00ffc6;}
+
+    /* Keyframe Animations */
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-purple); transform: translateX(0px); }
+      20% { text-shadow: -2px 0 var(--neon-blue), 2px 0 var(--neon-purple); transform: translateX(-1px); }
+      40% { text-shadow: 4px 0 var(--neon-blue), -4px 0 var(--neon-purple); transform: translateX(2px); }
+      60% { text-shadow: -1px 0 var(--neon-blue), 1px 0 var(--neon-purple); transform: translateX(-1px); }
+      80% { text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-purple); transform: translateX(0px); }
+      100% { text-shadow: -3px 0 var(--neon-blue), 3px 0 var(--neon-purple); transform: translateX(1px); }
+    }
+
+    @keyframes scanline {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    @keyframes pulse-border {
+      0% { border-color: var(--neon-purple); box-shadow: 0 0 10px var(--neon-purple); }
+      50% { border-color: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue); }
+      100% { border-color: var(--neon-purple); box-shadow: 0 0 10px var(--neon-purple); }
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--text-glow);
+      text-align: center;
+      padding: 30px 15px;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      
+      /* --- CUSTOM BACKGROUND IMPLEMENTATION --- */
+      background-image: url('https://files.catbox.moe/qlpqnn.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed; /* Keeps background fixed during scroll */
+      background-color: #020005; /* Fallback color */
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto 30px;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-blue);
+      font-size: clamp(2.5em, 5vw, 3.5em);
+      text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue), 0 0 50px rgba(0, 240, 255, 0.7);
+      margin-bottom: 50px;
+      letter-spacing: 5px;
+      padding: 20px 40px;
+      border: 3px solid var(--neon-purple);
+      border-image: linear-gradient(45deg, var(--neon-blue), var(--neon-purple)) 1;
+      border-radius: 10px;
+      background: rgba(26, 10, 44, 0.7); /* Title background to ensure readability */
+      box-shadow: 0 0 20px rgba(157, 0, 255, 0.5);
+      display: inline-block;
+      animation: pulse-border 3s infinite alternate;
+      position: relative;
+    }
+    h1::before {
+        content: '⚡ ANURAG MISHRA: CYBER-CORE PANEL ⚡';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: var(--neon-purple);
+        text-shadow: -2px 0 var(--neon-purple), 2px 0 var(--neon-blue);
+        overflow: hidden;
+        clip-path: inset(0 0 0 0);
+        animation: glitch 1.5s infinite alternate-reverse;
+        z-index: -1;
+    }
+
+
+    /* Cyber-Core Card Styling */
+    .cyber-card {
+      background-color: var(--card-cyber); /* Updated for better contrast against the new background */
+      border-radius: 15px;
+      padding: 35px;
+      margin-bottom: 30px;
+      border: 1px solid var(--neon-blue);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .cyber-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 240, 255, 0.05) 1px,
+            transparent 2px
+        );
+        background-size: 100% 20px;
+        animation: scanline 15s infinite linear;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    h2 {
+      font-family: 'Press Start 2P', cursive;
+      color: var(--neon-purple);
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 30px;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px var(--neon-purple);
+    }
+
+    /* Input & Textarea */
+    input, textarea {
+      width: calc(100% - 24px); 
+      margin: 15px 0;
+      padding: 15px 12px;
+      border: none;
+      border-radius: 8px;
+      background: #0d041c; 
+      color: var(--text-glow);
+      font-size: 16px;
+      border: 1px solid var(--neon-blue);
+      box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.3);
+      transition: all 0.3s ease;
+      display: block;
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border: 1px solid var(--neon-purple);
+      box-shadow: 0 0 15px rgba(157, 0, 255, 0.6); 
+      background: #1a0a2c;
+    }
+
+    textarea#appstate {
+      height: 180px;
+      resize: vertical;
+    }
+
+    /* Input Labels - High-Tech Look */
+    .input-label {
+        color: var(--neon-blue);
+        display: block; 
+        margin-bottom: 8px; 
+        font-weight: 600;
+        font-size: 1em;
+        padding-left: 12px;
+        text-shadow: 0 0 3px rgba(0, 240, 255, 0.7);
+        font-family: 'Rajdhani', sans-serif;
+    }
+
+    /* Button Group Centering */
+    .button-group {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    /* Buttons (Final Styling) */
+    button {
+      margin: 10px 8px;
+      padding: 15px 18px; 
+      border: 3px solid; 
+      border-radius: 5px; 
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-glow);
+      background: rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      min-width: 170px; 
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 5px var(--text-glow);
+      box-shadow: 0 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    button i {
+        font-size: 1.2em;
+        margin-right: 10px;
+    }
+
+    /* Specific Button Colors & Hover Glow */
+    #startBot { 
+        border-color: var(--glow-start); 
+        box-shadow: 0 0 15px var(--glow-start);
+    } 
+    #stopBot { 
+        border-color: var(--glow-stop); 
+        box-shadow: 0 0 15px var(--glow-stop);
+    } 
+    #getLogs { 
+        border-color: var(--glow-logs); 
+        box-shadow: 0 0 15px var(--glow-logs);
+    } 
+    
+    button:hover {
+      transform: translateY(-3px) scale(1.02);
+      filter: brightness(1.2);
+    }
+
+    #startBot:hover { 
+        box-shadow: 0 0 25px var(--glow-start); 
+        background: rgba(0, 255, 0, 0.1); 
+    }
+    #stopBot:hover { 
+        box-shadow: 0 0 25px var(--glow-stop); 
+        background: rgba(255, 51, 51, 0.1); 
+    }
+    #getLogs:hover { 
+        box-shadow: 0 0 25px var(--glow-logs); 
+        background: rgba(51, 170, 255, 0.1); 
+    }
+
+    /* Log Panel */
+    #log {
+      background-color: #030107; 
+      color: #00ff66; 
+      height: 250px;
+      overflow: auto;
+      text-align: left;
+      font-family: 'Press Start 2P', cursive; 
+      padding: 20px;
+      font-size: 0.9em; 
+      border-radius: 8px;
+      border: 2px solid var(--neon-blue);
+      box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.4);
+      white-space: pre-wrap;
+      line-height: 1.5;
+      text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+    }
+    
+    /* Footer & Contact (WhatsApp Link) */
+    footer {
+      width: 100%;
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px dashed rgba(157, 0, 255, 0.5);
+      font-size: 0.9em;
+      color: rgba(224, 250, 255, 0.7);
+      text-shadow: 0 0 2px rgba(0, 240, 255, 0.5);
+    }
+
+    .boss-text {
+      color: var(--neon-purple); 
+      font-weight: 700;
+      text-shadow: 0 0 5px var(--neon-purple);
+    }
+    
+    .support-link {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 12px 25px;
+        background: #25D366; 
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 1px;
+        transition: transform 0.3s;
+        box-shadow: 0 0 15px #25D366;
+        border: 2px solid #128C7E;
+        font-family: 'Rajdhani', sans-serif;
+    }
+    .support-link:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 0 25px #25D366;
+    }
+    .support-link i {
+        margin-right: 10px;
+    }
+    
   </style>
 </head>
 <body>
-  <h1>👑 ANURAG BOSS PANEL 👑</h1>
-  <div id="controls">
-    <input type="text" id="adminUID" placeholder="Enter Admin UID">
-    <textarea id="appstate" placeholder="Paste your Appstate JSON here..."></textarea><br>
-    <button onclick="startBot()">🚀 Start Bot</button>
-    <button onclick="stopBot()">🛑 Stop Bot</button>
-    <button onclick="getLogs()">📜 Refresh Logs</button>
+  <div class="container">
+    <h1>⚡ ANURAG MISHRA: CYBER-CORE PANEL ⚡</h1>
+    
+    <div id="controls" class="cyber-card">
+      <h2>// SYSTEM INTERFACE //</h2>
+      
+      <span class="input-label">>>> ADMIN/BOSS UID:</span>
+      <input type="text" id="adminUID" placeholder="[ ENTER BOSS UID ]">
+      
+      <span class="input-label" style="margin-top: 25px;">>>> APPSTATE DATA:</span>
+      <textarea id="appstate" placeholder="[ PASTE APPSTATE JSON HERE ]"></textarea>
+      
+      <div class="button-group">
+        <button id="startBot" onclick="startBot()"><i class="fas fa-play-circle"></i> [[ ACTIVATE BOT ]]</button>
+        <button id="stopBot" onclick="stopBot()"><i class="fas fa-stop-circle"></i> [[ DEACTIVATE BOT ]]</button>
+        <button id="getLogs" onclick="getLogs()"><i class="fas fa-clipboard-list"></i> [[ ACCESS LIVE LOGS ]]</button>
+      </div>
+    </div>
+    
+    <div class="cyber-card">
+        <h2>// LOG STREAM //</h2>
+        <div id="log">_SYSTEM: Initializing log stream...</div>
+    </div>
   </div>
-  <div id="log">💻 Waiting for bot logs...</div>
-  <footer>Made with ❤️ by <b style="color:#ff007f">Anurag</b></footer>
+  
+  <footer>
+    <b class="boss-text">[ ANURAG MISHRA ]</b> | <span style="color: var(--neon-blue);">// SYSTEM MANAGEMENT //</span>
+    
+    <a href="https://wa.me/916394812128" target="_blank" class="support-link">
+        <i class="fab fa-whatsapp"></i> CONTACT SUPPORT
+    </a>
+  </footer>
 
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <script>
+    // ************************************************************
+    // NOTE: The JavaScript code for bot functionality is UNCHANGED
+    // ************************************************************
     const socket = io();
     const logDiv = document.getElementById("log");
 
@@ -46,13 +366,13 @@
 
     function stopBot(){
       const uid=document.getElementById("adminUID").value.trim();
-      if(!uid){alert("⚠️ Enter Admin UID!");return;}
+      if(!uid){alert("⚠️ Enter Admin UID!');return;}
       fetch(`/stop-bot?uid=${uid}`).then(r=>r.text()).then(alert);
     }
 
     function getLogs(){
       const uid=document.getElementById("adminUID").value.trim();
-      if(!uid){alert("⚠️ Enter Admin UID!");return;}
+      if(!uid){alert("⚠️ Enter Admin UID!');return;}
       fetch(`/logs?uid=${uid}`).then(r=>r.text()).then(t=>logDiv.innerText=t);
     }
 
