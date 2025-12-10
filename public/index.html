@@ -242,74 +242,147 @@
     }
 
     .button-group {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 30px;
     }
 
     .cyber-btn {
-      padding: 14px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 15px;
       border: none;
-      border-radius: 12px;
+      border-radius: 20px;
       font-family: 'Orbitron', monospace;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
       letter-spacing: 1px;
       text-transform: uppercase;
+      min-height: 120px;
     }
 
     .cyber-btn::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.6s ease;
     }
 
     .cyber-btn:hover::before {
-      left: 100%;
+      transform: scale(1);
+    }
+
+    .cyber-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .cyber-btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 10px currentColor);
+      transition: transform 0.3s, filter 0.3s;
+    }
+
+    .cyber-btn:hover .btn-icon {
+      transform: scale(1.2) rotate(5deg);
+      filter: drop-shadow(0 0 20px currentColor);
+    }
+
+    .btn-text {
+      font-size: 0.7rem;
+      opacity: 0.9;
     }
 
     .btn-start {
-      background: linear-gradient(135deg, #00ffff, #00aaff);
-      color: #000;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+      background: linear-gradient(145deg, rgba(0, 255, 200, 0.2), rgba(0, 200, 255, 0.1));
+      border: 2px solid rgba(0, 255, 200, 0.5);
+      color: #00ffc8;
+      box-shadow: 
+        0 0 30px rgba(0, 255, 200, 0.2),
+        inset 0 0 30px rgba(0, 255, 200, 0.05);
     }
 
     .btn-start:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+      transform: translateY(-8px) scale(1.02);
+      border-color: #00ffc8;
+      box-shadow: 
+        0 15px 40px rgba(0, 255, 200, 0.4),
+        inset 0 0 40px rgba(0, 255, 200, 0.1),
+        0 0 60px rgba(0, 255, 200, 0.3);
     }
 
     .btn-stop {
-      background: linear-gradient(135deg, #ff4757, #ff6b7a);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+      background: linear-gradient(145deg, rgba(255, 71, 87, 0.2), rgba(255, 100, 100, 0.1));
+      border: 2px solid rgba(255, 71, 87, 0.5);
+      color: #ff6b7a;
+      box-shadow: 
+        0 0 30px rgba(255, 71, 87, 0.2),
+        inset 0 0 30px rgba(255, 71, 87, 0.05);
     }
 
     .btn-stop:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(255, 71, 87, 0.6);
+      transform: translateY(-8px) scale(1.02);
+      border-color: #ff6b7a;
+      box-shadow: 
+        0 15px 40px rgba(255, 71, 87, 0.4),
+        inset 0 0 40px rgba(255, 71, 87, 0.1),
+        0 0 60px rgba(255, 71, 87, 0.3);
     }
 
     .btn-logs {
-      background: linear-gradient(135deg, #8a2be2, #9b4dca);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+      background: linear-gradient(145deg, rgba(138, 43, 226, 0.2), rgba(180, 100, 255, 0.1));
+      border: 2px solid rgba(138, 43, 226, 0.5);
+      color: #b366ff;
+      box-shadow: 
+        0 0 30px rgba(138, 43, 226, 0.2),
+        inset 0 0 30px rgba(138, 43, 226, 0.05);
     }
 
     .btn-logs:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(138, 43, 226, 0.6);
+      transform: translateY(-8px) scale(1.02);
+      border-color: #b366ff;
+      box-shadow: 
+        0 15px 40px rgba(138, 43, 226, 0.4),
+        inset 0 0 40px rgba(138, 43, 226, 0.1),
+        0 0 60px rgba(138, 43, 226, 0.3);
+    }
+
+    .btn-icon-img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px currentColor);
+      transition: transform 0.3s, filter 0.3s;
+    }
+
+    .cyber-btn:hover .btn-icon-img {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 15px currentColor);
     }
 
     .log-container {
@@ -442,10 +515,17 @@
         padding: 20px;
       }
       .button-group {
-        flex-direction: column;
+        grid-template-columns: 1fr;
       }
       .cyber-btn {
-        width: 100%;
+        flex-direction: row;
+        min-height: auto;
+        padding: 15px 20px;
+        gap: 15px;
+      }
+      .btn-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0;
       }
     }
   </style>
@@ -494,9 +574,18 @@
       </div>
 
       <div class="button-group">
-        <button class="cyber-btn btn-start" onclick="startBot()">🚀 START BOT</button>
-        <button class="cyber-btn btn-stop" onclick="stopBot()">🛑 STOP BOT</button>
-        <button class="cyber-btn btn-logs" onclick="getLogs()">📜 REFRESH LOGS</button>
+        <button class="cyber-btn btn-start" onclick="startBot()">
+          <span class="btn-icon">🚀</span>
+          <span class="btn-text">START BOT</span>
+        </button>
+        <button class="cyber-btn btn-stop" onclick="stopBot()">
+          <span class="btn-icon">⛔</span>
+          <span class="btn-text">STOP BOT</span>
+        </button>
+        <button class="cyber-btn btn-logs" onclick="getLogs()">
+          <span class="btn-icon">📊</span>
+          <span class="btn-text">REFRESH</span>
+        </button>
       </div>
     </div>
 
