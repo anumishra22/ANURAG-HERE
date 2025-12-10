@@ -12,8 +12,14 @@ const USERS_DIR = path.join(__dirname, "users");
 if (!fs.existsSync(USERS_DIR)) fs.mkdirSync(USERS_DIR, { recursive: true });
 
 // ---- Middlewares ----
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
 app.use(express.json({ limit: "10mb" }));
-app.use(express.static(path.join(__dirname, "public"))); // for index.html + css/js
+app.use(express.static(path.join(__dirname, "public"), { etag: false, lastModified: false }));
 
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
