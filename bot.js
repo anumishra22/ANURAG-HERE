@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import ws3 from "ws3-fca";
-import express from "express";
 import http from "http";
 import https from "https";
 
@@ -152,15 +151,7 @@ async function enforceNickLockForThread(api, threadID, nick) {
   return true;
 }
 
-// ----- Keepalive -----
-try {
-  const app = express();
-  app.get("/", (req, res) => res.send("OK"));
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => log(`🌐 Keepalive on ${PORT}`));
-} catch (e) {
-  log("⚠️ Keepalive failed: " + e.message);
-}
+// ----- Keepalive ----- (Disabled: main server handles this)
 
 process.on("uncaughtException", e => log("⛔ uncaughtException: " + e.message));
 process.on("unhandledRejection", e => log("⛔ unhandledRejection: " + e.message));

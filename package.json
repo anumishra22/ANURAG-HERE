@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Facebook Messenger Group Bot Panel (ANURAG BOT)",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },

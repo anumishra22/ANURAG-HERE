@@ -6,7 +6,7 @@ import http from "http";
 import { Server } from "socket.io";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 const USERS_DIR = path.join(__dirname, "users");
 if (!fs.existsSync(USERS_DIR)) fs.mkdirSync(USERS_DIR, { recursive: true });
